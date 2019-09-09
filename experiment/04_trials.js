@@ -116,7 +116,7 @@ const items = {
              utterance2l: utt_predicative.utterance1b,
              utterance2r: utt_predicative.utterance2b,
              picture: "images/tree-parade-basic.png",
-             target: "warmup/sequoia.jpg",
+             target: "warmup/sequoia.png",
            },
            {
              np: ["bonsai", "tree"],
@@ -322,7 +322,7 @@ fish: {
 
 trees: {
   item: "trees",
-  picture1: "warmup/sequoia.jpg",
+  picture1: "warmup/sequoia.png",
   picture2: "warmup/bonsai.jpg",
   correct1: ["redwood", "sequoia"],
   correct2: ["bonsai"],
