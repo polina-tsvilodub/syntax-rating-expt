@@ -44,6 +44,17 @@ const instructions = magpieViews.view_generator("instructions", {
   buttonText: 'go to trials'
 });
 
+// const custom_warmup = custom_warmup_slider({
+//   trials: 2,
+//   context: ,
+//   text:,
+//   target:,
+//   question:,
+//   sentence1:,
+//   option1:,
+//   option2:,
+//   sentence2:
+// })
 
 // In the post test questionnaire you can ask your participants addtional questions
 // const post_test = magpieViews.view_generator("post_test", {
