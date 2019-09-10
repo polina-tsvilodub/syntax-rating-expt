@@ -91,6 +91,8 @@ const custom_slider = function(config, startingTime) {
     trials: config.trials,
     render: function(CT, magpie, startingTime) {
       $("main").html(`<div class='magpie-view'>
+      <link rel="preload" href="${config.data[CT].context_picture}" as="image">
+      <link rel="preload" href="${config.data[CT].target}" as="image">
       <section class="magpie-text-container">
         <p class="magpie-view-question">${config.data[CT].context}</p>
       </section>
@@ -117,7 +119,7 @@ const custom_slider = function(config, startingTime) {
                   <span style="position:absolute;bpttom:0;left:20px;align:center">
                       <div class='magpie-view-answer-container'>
                           <span class='magpie-response-slider-option'>${config.data[CT].option1}</span>
-                            <input type='range' id='response1' class='magpie-response-slider' min='0' max='100' value='50'/>
+                            <input type='range' id='response1' class='magpie-response-slider1' min='0' max='100' value='50'/>
                           <span class='magpie-response-slider-option' >${config.data[CT].option2}</span>
                       </div>
                   </span>
@@ -133,12 +135,15 @@ const custom_slider = function(config, startingTime) {
                   <span style="position:absolute;bpttom:0;left:20px;align:center">
                       <div class='magpie-view-answer-container'>
                           <span class='magpie-response-slider-option'>${config.data[CT].option1}</span>
-                            <input type='range' id='response2' class='magpie-response-slider' min='0' max='100' value='50'/>
+                            <input type='range' id='response2' class='magpie-response-slider1' min='0' max='100' value='50'/>
                           <span class='magpie-response-slider-option' >${config.data[CT].option2}</span>
                       </div>
                   </span>
               </div>
       </div>
+
+
+
 
           <button id='next' class='magpie-view-button magpie-nodisplay'>next</button>
       </div>`);
@@ -151,15 +156,48 @@ const custom_slider = function(config, startingTime) {
         response1 = $("#response1");
         response2 = $("#response2");
 
+
+        // $("#response1").removeClass("::-webkit-slider-thumb")
+
        response1.on("click", function() {
+
+          document.getElementById("response1").classList.remove('magpie-response-slider1');
+          document.getElementById("response1").classList.add('magpie-response-slider2');
+
+          document.getElementById("response2").classList.remove('magpie-response-slider1');
+          document.getElementById("response2").classList.add('magpie-response-slider2');
+          response1.on("click", function() {
+            response2.on("click", function() {
+
+                 $("#next").removeClass("magpie-nodisplay");
+            });
+          })
           response2.on("click", function() {
-               $("#next").removeClass("magpie-nodisplay");
-          });
+            response1.on("click", function() {
+
+                 $("#next").removeClass("magpie-nodisplay");
+            });
+          })
+
        });
        response2.on("click", function() {
-          response1.on("click", function() {
-               $("#next").removeClass("magpie-nodisplay");
-          });
+         document.getElementById("response1").classList.remove('magpie-response-slider1');
+         document.getElementById("response1").classList.add('magpie-response-slider2');
+
+         document.getElementById("response2").classList.remove('magpie-response-slider1');
+         document.getElementById("response2").classList.add('magpie-response-slider2');
+         response2.on("click", function() {
+           response1.on("click", function() {
+
+                $("#next").removeClass("magpie-nodisplay");
+           });
+         })
+         response1.on("click", function() {
+           response2.on("click", function() {
+
+                $("#next").removeClass("magpie-nodisplay");
+           });
+         })
        });
 
        next.on("click", function() {
@@ -200,11 +238,12 @@ const custom_textfield_warmup = function(config, startingTime) {
     trials: config.trials,
     render: function(CT, magpie, startingTime) {
       $("main").html(`<div class='magpie-view'>
+      <link rel="preload" href="${config.data[CT].picture1}" as="image">
+      <link rel="preload" href="${config.data[CT].picture2}" as="image">
       <h1 class='magpie-view-title'>Warm-up trials</h1>
       <section class="magpie-text-container">
         <p class="magpie-view-question">${config.data[CT].text}</p>
       </section>
-
 
     <div style="width:100%;">
      <div style="width:50%;height:400px;float:left;position:relative;align:center;">

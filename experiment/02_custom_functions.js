@@ -29,9 +29,20 @@ const generateID = function(len) {
 };
 // Declare your helper functions here
 
+// $( function() {
+//     var handle = $( "#custom-handle" );
+//     $( "#slider" ).slider({
+//       create: function() {
+//         handle.addClass("magpie-nodisplay");
+//       } //,
+//       // slide: function( event ) {
+//       //   handle;
+//       }
+//     });
+//   } );
 
 
-/* Hooks  
+/* Hooks
 *
 *
 */
