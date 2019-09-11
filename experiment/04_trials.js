@@ -118,7 +118,7 @@ const items = {
               target: "warmup/sunflower.png",
             },
             {
-              np: ["dandelion", "fish"],
+              np: ["dandelion", "flower"],
               adj: ["small", "big"],
               utterance1l: utt_prenominal.utterance1s,
               utterance1r: utt_prenominal.utterance2s,
