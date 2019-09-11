@@ -1,4 +1,23 @@
 // In this file you can specify the trial data for your experiment
+const slider_warmup = {
+  warmup1: [
+  {text: "Imagine you see this object.",
+  target: "warmup/basketball.png",
+  question: "How well does each of the sentences describe the object? (Click on the slider to provide a rating)",
+  sentence1: "The basketball is orange.",
+  option1: "very bad",
+  option2: "very well",
+  sentence2: "The basketball is green."
+  },
+  {text: "Imagine you see this object.",
+  target: "warmup/peony.png",
+  question: "How well does each of the sentences describe the object? (Click on the slider to provide a rating)",
+  sentence1: "The peony is red.",
+  option1: "very bad",
+  option2: "very well",
+  sentence2: "The peony is yellow."}]
+ }
+
 const utt_prenominal = {utterance1b: "That's a ", utterance2b: " ", utterance1s: "That's a ", utterance2s: " ", condition: "prenominal"}
 const utt_predicative = {utterance1b: "That ", utterance2b: " is ", utterance1s: "That ", utterance2s: " is ", condition:"predicative"}
 

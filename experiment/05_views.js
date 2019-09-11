@@ -29,55 +29,26 @@ const instructions = magpieViews.view_generator("instructions", {
             make sure you can concentrate on the task without disturbance.
             <br />
             <br />
-            The experiment consists of two rounds, each having a few warm-up trials before the main trials start.
+            The experiment consists of two warm-up trials and six main trials.
             <br />
             <br />
-            During the warm-up trials, you will see pictures of objects.
+            First, you will complete warm-up trials. You will see pictures of objects.
             <br />
             <br />
-            Please label the objects. You will be given feedback on your labels.
+            Someone says something about these objects. Please rate how well the uttered sentences describe the objects.
             <br />
             <br />
-            By pressing the button 'Go to Trials' you begin the first round.
+            By pressing the button 'Go to Trials' you begin the first warm-up trial.
 
             `,
   buttonText: 'go to trials'
 });
 
-// const custom_warmup = custom_warmup_slider({
-//   trials: 2,
-//   context: ,
-//   text:,
-//   target:,
-//   question:,
-//   sentence1:,
-//   option1:,
-//   option2:,
-//   sentence2:
-// })
-
-// In the post test questionnaire you can ask your participants addtional questions
-// const post_test = magpieViews.view_generator("post_test", {
-//   trials: 1,
-//   name: 'post_test',
-//   title: 'Additional information',
-//   text: 'Answering the following questions is optional, but your answers will help us analyze our results.'
-//
-  // You can change much of what appears here, e.g., to present it in a different language, as follows:
-  // buttonText: 'Weiter',
-  // age_question: 'Alter',
-  // gender_question: 'Geschlecht',
-  // gender_male: 'männlich',
-  // gender_female: 'weiblich',
-  // gender_other: 'divers',
-  // edu_question: 'Höchster Bildungsabschluss',
-  // edu_graduated_high_school: 'Abitur',
-  // edu_graduated_college: 'Hochschulabschluss',
-  // edu_higher_degree: 'Universitärer Abschluss',
-  // languages_question: 'Muttersprache',
-  // languages_more: '(in der Regel die Sprache, die Sie als Kind zu Hause gesprochen haben)',
-  // comments_question: 'Weitere Kommentare'
-
+const custom_warmup = custom_warmup_slider({
+  trials: slider_warmup.warmup1.length,
+  name: 'custom_warmup',
+  data: _.shuffle(slider_warmup.warmup1)
+})
 
 // The 'thanks' view is crucial; never delete it; it submits the results!
 const thanks = magpieViews.view_generator("thanks", {
@@ -139,21 +110,21 @@ const custom_slider2 = custom_slider({
 
 
 
-const warmup1 = custom_textfield_warmup({
-  name: 'warmup1',
-  title: 'Labeling task',
-  trials: 3,
-  data: trial_info.warmup1,
-});
-
-
-const warmup2 = custom_textfield_warmup({
-  name: 'warmup2',
-  title: 'Labeling task',
-  trials: 3,
-  data: trial_info.warmup2,
-});
-
+// const warmup1 = custom_textfield_warmup({
+//   name: 'warmup1',
+//   title: 'Labeling task',
+//   trials: 3,
+//   data: trial_info.warmup1,
+// });
+//
+//
+// const warmup2 = custom_textfield_warmup({
+//   name: 'warmup2',
+//   title: 'Labeling task',
+//   trials: 3,
+//   data: trial_info.warmup2,
+// });
+//
 
 
 var speaker = _.sample(["James", "John", "Robert", "Michael", "William", "David", "Richard", "Joseph", "Thomas", "Charles"]);
@@ -202,18 +173,18 @@ const context1 = magpieViews.view_generator("instructions",{
             `,
     buttonText: 'go to trials'
 });
-const context2 = magpieViews.view_generator("instructions",{
-    trials: 1,
-    name: 'instructions',
-    title: 'Instructions',
-    text:  `
-    Now the second round of the experiment starts. You will complete similar trials.
-    <br />
-    </br>
-    Press the button 'Go to trials' to begin the second round.
-            `,
-    buttonText: 'go to trials'
-});
+// const context2 = magpieViews.view_generator("instructions",{
+//     trials: 1,
+//     name: 'instructions',
+//     title: 'Instructions',
+//     text:  `
+//     Now the second round of the experiment starts. You will complete similar trials.
+//     <br />
+//     </br>
+//     Press the button 'Go to trials' to begin the second round.
+//             `,
+//     buttonText: 'go to trials'
+// });
 
 // The 'thanks' view is crucial; never delete it; it submits the results!
 

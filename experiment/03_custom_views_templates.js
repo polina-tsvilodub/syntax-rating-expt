@@ -86,15 +86,12 @@ const custom_botcaptcha = function(config){
 
 const custom_warmup_slider = function(config) {
   const view = {
-    name: 'slider_warmup',
+    name: config.name,
     CT: 0,
     trials: config.trials,
-    render: function(config, magpie) {
-      $("main").html(`<div class='magpie-view'>
+    render: function(CT, magpie) {
+      $("main").html(`<div class='magpie-view1'>
       <link rel="preload" href="${config.data[CT].target}" as="image">
-      <section class="magpie-text-container">
-        <p class="magpie-view-question">${config.data[CT].context}</p>
-      </section>
       <section class="magpie-text-container">
         <p class="magpie-view-question">${config.data[CT].text}</p>
       </section>
@@ -133,7 +130,7 @@ const custom_warmup_slider = function(config) {
                       <div class='magpie-view-answer-container'>
                           <span class='magpie-response-slider-option'>${config.data[CT].option1}</span>
                             <input type='range' id='response2' class='magpie-response-slider1' min='0' max='100' value='50'/>
-                            <input type='range' id='response2_1' class='magpie-response-slider2 magpie-nodisplay' min='0' max='100' value='50'/>
+                            <input type='range' id='response2_1' class='magpie-response-slider2 magpie-nodisplay' min='0' max='100' />
                           <span class='magpie-response-slider-option' >${config.data[CT].option2}</span>
                       </div>
                   </span>
@@ -151,9 +148,56 @@ const custom_warmup_slider = function(config) {
       response1 = $("#response1");
       response2 = $("#response2");
 
+      response1.on("click", function() {
+          response1.addClass("magpie-nodisplay");
+          document.getElementsByTagName("input")[1].setAttribute("value", response1.val());
+           $("#response1_1").removeClass("magpie-nodisplay");
+
+           response2.on("click", function() {
+             response2.addClass("magpie-nodisplay");
+             document.getElementsByTagName("input")[3].setAttribute("value", response2.val());
+             $("#response2_1").removeClass("magpie-nodisplay");
+             $("#next").removeClass("magpie-nodisplay");
+           })
+
+      });
+      response2.on("click", function() {
+        response2.addClass("magpie-nodisplay");
+        document.getElementsByTagName("input")[3].setAttribute("value", response2.val());
+        $("#response2_1").removeClass("magpie-nodisplay");
+
+        response1.on("click", function() {
+          response1.addClass("magpie-nodisplay");
+          document.getElementsByTagName("input")[1].setAttribute("value", response1.val());
+          $("#response1_1").removeClass("magpie-nodisplay");
+          $("#next").removeClass("magpie-nodisplay");
+        })
+      });
+
+      next.on("click", function() {
+        console.log("CLICK")
+          // const RT = Date.now() - startingTime; // measure RT before anything else
+          let trial_data = {
+              trial_name: config.name,
+              trial_number: CT + 1,
+              // 0 is prenominal, 1 is predicative
+              // sentence1: syntax[0],
+              // sentence2: syntax[1],
+              response1: $("#response1_1").val(),
+              response2: $("#response2_1").val(),
+              // RT: RT
+          };
+
+          trial_data = magpieUtils.view.save_config_trial_data(config.data[CT], trial_data);
+
+          magpie.trial_data.push(trial_data);
+          magpie.findNextView();
+
+      })
 
     }
   }
+  return view;
 }
 
 
@@ -163,7 +207,7 @@ const custom_slider = function(config, startingTime) {
     CT: 0,
     trials: config.trials,
     render: function(CT, magpie, startingTime) {
-      $("main").html(`<div class='magpie-view'>
+      $("main").html(`<div class='magpie-view1'>
       <link rel="preload" href="${config.data[CT].context_picture}" as="image">
       <link rel="preload" href="${config.data[CT].target}" as="image">
       <section class="magpie-text-container">
@@ -264,7 +308,7 @@ const custom_slider = function(config, startingTime) {
                // sentence1: syntax[0],
                // sentence2: syntax[1],
                response1: $("#response1_1").val(),
-               response2: response2.val(),
+               response2: $("#response2_1").val(),
                // RT: RT
            };
 
@@ -279,192 +323,6 @@ const custom_slider = function(config, startingTime) {
 
         // next.on("click");
 
-
-};
-return view;
-};
-
-
-const custom_textfield_warmup = function(config, startingTime) {
-  const view = {
-    name: config.name,
-    CT: 0,
-    trials: config.trials,
-    render: function(CT, magpie, startingTime) {
-      $("main").html(`<div class='magpie-view'>
-      <link rel="preload" href="${config.data[CT].picture1}" as="image">
-      <link rel="preload" href="${config.data[CT].picture2}" as="image">
-      <h1 class='magpie-view-title'>Warm-up trials</h1>
-      <section class="magpie-text-container">
-        <p class="magpie-view-question">${config.data[CT].text}</p>
-      </section>
-
-    <div style="width:100%;">
-     <div style="width:50%;height:400px;float:left;position:relative;align:center;">
-        <div style="position:absolute;bottom:0;right:20px;">
-          <div class="picture"  align="center" >
-            <img src="${config.data[CT].picture1}">
-          </div>
-          <div  class='magpie-view-answer-container'>
-            <p id='1' class='magpie-view-text'>${config.data[CT].question1}
-              <textarea id='textbox-input1' rows=1 cols=15 class='textbox-input'/>
-            </p>
-            <p class = 'correct-answer1 magpie-nodisplay'>Possible correct labels: ${config.data[CT].correct1}</p>
-          </div>
-        </div>
-    </div>
-    <div style="width:50%;height:400px;float:right; position:relative;align:center;">
-      <div style="position:absolute;bottom:0;left:20px;">
-          <div  class="picture" align="center" >
-            <img src="${config.data[CT].picture2}">
-          </div>
-          <div class='magpie-view-answer-container' >
-            <p id='2' class='magpie-view-text'>${config.data[CT].question3}
-              <textarea id='textbox-input2' rows=1 cols=15 class='textbox-input'/>
-            </p>
-            <p class = 'correct-answer2 magpie-nodisplay'>Possible correct labels: ${config.data[CT].correct2}</p>
-          </div>
-      </div>
-      </div>
-    </div>
-
-    <div  class='magpie-view-answer-container'>
-      <p id='3' class='magpie-view-text'>${config.data[CT].question2}
-        <textarea id='textbox-input3' rows=1 cols=15 class='textbox-input'/>
-      <p id='4'></p>
-      <p class = 'correct-answer3 magpie-nodisplay'>Possible correct labels: ${config.data[CT].correct3}</p>
-      </p>
-      <br />
-      <p class = 'correct-answer4 magpie-nodisplay'>Please enter the correct labels to proceed</p>
-    </div>
-
-          <button id='next' class='magpie-view-button magpie-nodisplay'>next</button>
-    </div>  `);
-
-        let next;
-        let textInput1;
-        let textInput2;
-        let textInput3;
-
-
-        const minChars = config.data[CT].min_chars === undefined ? 2 : config.data[CT].min_chars;
-
-        next = $("#next");
-        textInput1 = $("#textbox-input1")
-        textInput2 = $("#textbox-input2")
-        textInput3 = $("#textbox-input3")
-
-        textInput1.on("keyup", function() {
-            // if the text is longer than (in this case) 10 characters without the spaces
-            // the 'next' button appears
-            if (textInput1.val().trim().length > minChars)  {
-              textInput2.on("keyup", function() {
-                if (textInput2.val().trim().length > minChars) {
-                  textInput3.on("keyup", function() {
-                    if (textInput3.val().trim().length > minChars) {
-                        next.removeClass("magpie-nodisplay");
-                    }
-                  });
-                } else if (textInput3.val().trim().length > minChars) {
-                    textInput2.on("keyup", function() {
-                      if (textInput2.val().trim().length > minChars) {
-                        next.removeClass("magpie-nodisplay");
-                       }
-                    })
-                };
-              });
-            } else if (textInput2.val().trim().length > minChars) {
-              textInput1.on("keyup", function() {
-                if (textInput1.val().trim().length > minChars) {
-                  textInput3.on("keyup", function() {
-                    if (textInput3.val().trim().length > minChars) {
-                        next.removeClass("magpie-nodisplay");
-                    }
-                  });
-                } else if (textInput3.val().trim().length > minChars) {
-                    textInput1.on("keyup", function() {
-                      if (textInput1.val().trim().length > minChars) {
-                        next.removeClass("magpie-nodisplay");
-                       }
-                    })
-                };
-              });
-            } else if (textInput3.val().trim().length > minChars) {
-              textInput1.on("keyup", function() {
-                if (textInput1.val().trim().length > minChars) {
-                  textInput2.on("keyup", function() {
-                    if (textInput2.val().trim().length > minChars) {
-
-                        next.removeClass("magpie-nodisplay");
-
-                    }
-                  });
-                } else if (textInput2.val().trim().length > minChars) {
-                    textInput1.on("keyup", function() {
-                      if (textInput1.val().trim().length > minChars) {
-                        next.removeClass("magpie-nodisplay");
-                       }
-                    })
-                };
-              });
-
-            } else {
-                next.addClass("magpie-nodisplay");
-            }
-        });
-
-        var attempts = 0;
-        // the trial data gets added to the trial object
-        next.on("click", function(startingTime) {
-          attempts = attempts + 1;
-          let trial_data = {
-              trial_name: config.name,
-              trial_number: CT + 1,
-              attempts: attempts,
-              response1: textInput1.val().trim(),
-              response2: textInput2.val().trim(),
-              response3: textInput3.val().trim()
-          //    RT: RT
-          };
-          trial_data = magpieUtils.view.save_config_trial_data(config.data[CT], trial_data);
-          magpie.trial_data.push(trial_data);
-
-          var flag = true;
-
-          if (config.data[CT].correct1.includes(textInput1.val().trim().toLowerCase()) == false) {
-            flag = false;
-            $(".correct-answer1").removeClass("magpie-nodisplay")
-            $(".correct-answer4").removeClass("magpie-nodisplay")
-          } else {
-            $(".correct-answer1").addClass("magpie-nodisplay")
-          }
-
-
-          if (config.data[CT].correct2.includes(textInput2.val().trim().toLowerCase()) == false) {
-            flag = false;
-            $(".correct-answer2").removeClass("magpie-nodisplay")
-            $(".correct-answer4").removeClass("magpie-nodisplay")
-          } else {
-            $(".correct-answer2").addClass("magpie-nodisplay")
-          }
-
-          if (config.data[CT].correct3.includes(textInput3.val().trim().toLowerCase()) == false) {
-            flag = false;
-            $(".correct-answer3").removeClass("magpie-nodisplay")
-            $(".correct-answer4").removeClass("magpie-nodisplay")
-          } else {
-            $(".correct-answer3").addClass("magpie-nodisplay")
-          }
-
-          if (flag) {
-
-            magpie.findNextView();
-           }
-
-        });
-
-        $('#next').on("click");
-    },
 
 };
 return view;

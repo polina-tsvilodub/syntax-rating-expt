@@ -16,13 +16,12 @@ $("document").ready(function() {
         // You have to specify all views you want to use in this experiment and the order of them
         views_seq: [
             custom_intro,
-            // botcaptcha,
+            botcaptcha,
             instructions,
-            // warmup1,
+            custom_warmup,
             context1,
             custom_slider1,
-            context2,
-            // warmup2,
+            // context2,
             custom_slider2,
             custom_post_test,
             thanks,
@@ -44,8 +43,8 @@ $("document").ready(function() {
         progress_bar: {
             in: [
                 // list the view-names of the views for which you want a progress bar
-                warmup1.name,
-                warmup2.name,
+                // warmup1.name,
+                custom_warmup.name,
                 custom_slider1.name,
                 custom_slider2.name
             ],
