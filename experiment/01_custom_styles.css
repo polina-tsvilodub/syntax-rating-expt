@@ -35,13 +35,13 @@
     outline: none;
     border-radius: 10px;
     cursor: pointer;
-    height: 6px;
+    height: 10px;
 }
 .magpie-response-slider1::-moz-range-track {
     background: #cbcbcb;
     border-radius: 10px;
     cursor: pointer;
-    height: 6px;
+    height: 10px;
 }
 .magpie-response-slider1::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -78,13 +78,13 @@
     outline: none;
     border-radius: 10px;
     cursor: pointer;
-    height: 6px;
+    height: 10px;
 }
 .magpie-response-slider2::-moz-range-track {
     background: #cbcbcb;
     border-radius: 10px;
     cursor: pointer;
-    height: 6px;
+    height: 10px;
 }
 .magpie-response-slider2::-webkit-slider-thumb {
     -webkit-appearance: none;
