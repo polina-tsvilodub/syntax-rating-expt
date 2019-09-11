@@ -173,7 +173,8 @@ const main_trials = {
             // 0 subordinate, 1 basic level
             np: np_spec[0],
             // 0 congruent, 1 incongruent
-            congruence: adj_congr[0]
+            congruence: adj_congr[0],
+            sentence_order: syntax
         },
     dogs2:    {
       context: "You and your friend see the following:",
@@ -213,7 +214,8 @@ const main_trials = {
       // 0 subordinate, 1 basic level
       np: np_spec[2],
       // 0 congruent, 1 incongruent
-      congruence: adj_congr[2]
+      congruence: adj_congr[2],
+      sentence_order: syntax
         },
   fish:      {
     context: "You and your friend see the following:",
@@ -233,7 +235,8 @@ const main_trials = {
     // 0 subordinate, 1 basic level
     np: np_spec[3],
     // 0 congruent, 1 incongruent
-    congruence: adj_congr[3]
+    congruence: adj_congr[3],
+    sentence_order: syntax
         },
   flowers:      {
     context: "You and your friend see the following:",
@@ -252,7 +255,8 @@ const main_trials = {
     // 0 subordinate, 1 basic level
     np: np_spec[4],
     // 0 congruent, 1 incongruent
-    congruence: adj_congr[4]
+    congruence: adj_congr[4],
+    sentence_order: syntax
         },
     trees:    {
       context: "You and your friend see the following:",
@@ -272,7 +276,8 @@ const main_trials = {
       // 0 subordinate, 1 basic level
       np: np_spec[5],
       // 0 congruent, 1 incongruent
-      congruence: adj_congr[5]
+      congruence: adj_congr[5],
+      sentence_order: syntax
         }
 };
 

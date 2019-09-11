@@ -32,10 +32,11 @@ const instructions = magpieViews.view_generator("instructions", {
             The experiment consists of two warm-up trials and six main trials.
             <br />
             <br />
-            First, you will complete warm-up trials. You will see pictures of objects.
+            First, you will complete the warm-up trials.
             <br />
             <br />
-            Someone says something about these objects. Please rate how well the uttered sentences describe the objects.
+            You will see pictures of objects. Imagine someone says something about these objects. <br />
+            Please rate how well the uttered sentences describe the objects.
             <br />
             <br />
             By pressing the button 'Go to Trials' you begin the first warm-up trial.
@@ -110,23 +111,6 @@ const custom_slider2 = custom_slider({
 
 
 
-// const warmup1 = custom_textfield_warmup({
-//   name: 'warmup1',
-//   title: 'Labeling task',
-//   trials: 3,
-//   data: trial_info.warmup1,
-// });
-//
-//
-// const warmup2 = custom_textfield_warmup({
-//   name: 'warmup2',
-//   title: 'Labeling task',
-//   trials: 3,
-//   data: trial_info.warmup2,
-// });
-//
-
-
 var speaker = _.sample(["James", "John", "Robert", "Michael", "William", "David", "Richard", "Joseph", "Thomas", "Charles"]);
 var listener = _.sample(["Mary", "Patricia", "Jennifer", "Linda", "Elizabeth", "Barbara", "Susan", "Jessica", "Sarah", "Margaret"]);
 
@@ -173,18 +157,6 @@ const context1 = magpieViews.view_generator("instructions",{
             `,
     buttonText: 'go to trials'
 });
-// const context2 = magpieViews.view_generator("instructions",{
-//     trials: 1,
-//     name: 'instructions',
-//     title: 'Instructions',
-//     text:  `
-//     Now the second round of the experiment starts. You will complete similar trials.
-//     <br />
-//     </br>
-//     Press the button 'Go to trials' to begin the second round.
-//             `,
-//     buttonText: 'go to trials'
-// });
 
 // The 'thanks' view is crucial; never delete it; it submits the results!
 
