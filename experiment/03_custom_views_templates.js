@@ -208,7 +208,7 @@ const custom_slider = function(config, startingTime) {
     CT: 0,
     trials: config.trials,
     render: function(CT, magpie, startingTime) {
-      const startingTime = Date.now()
+      const startTime = Date.now()
       $("main").html(`<div class='magpie-view1'>
       <link rel="preload" href="${config.data[CT].context_picture}" as="image">
       <link rel="preload" href="${config.data[CT].target}" as="image">
@@ -302,7 +302,7 @@ const custom_slider = function(config, startingTime) {
 
        next.on("click", function() {
          console.log("CLICK")
-           const RT = Date.now() - startingTime; // measure RT before anything else
+           const RT = Date.now() - startTime; // measure RT before anything else
            let trial_data = {
                trial_name: config.name,
                trial_number: CT + 1,
