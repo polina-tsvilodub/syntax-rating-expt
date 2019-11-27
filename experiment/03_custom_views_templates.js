@@ -90,6 +90,7 @@ const custom_warmup_slider = function(config) {
     CT: 0,
     trials: config.trials,
     render: function(CT, magpie) {
+      const startingTime = Date.now()
       $("main").html(`<div class='magpie-view1'>
       <link rel="preload" href="${config.data[CT].target}" as="image">
       <section class="magpie-text-container">
@@ -176,7 +177,7 @@ const custom_warmup_slider = function(config) {
 
       next.on("click", function() {
         console.log("CLICK")
-          // const RT = Date.now() - startingTime; // measure RT before anything else
+          const RT = Date.now() - startingTime; // measure RT before anything else
           let trial_data = {
               trial_name: config.name,
               trial_number: CT + 1,
@@ -185,7 +186,7 @@ const custom_warmup_slider = function(config) {
               // sentence2: syntax[1],
               response1: $("#response1_1").val(),
               response2: $("#response2_1").val(),
-              // RT: RT
+              RT: RT
           };
 
           trial_data = magpieUtils.view.save_config_trial_data(config.data[CT], trial_data);
@@ -207,6 +208,7 @@ const custom_slider = function(config, startingTime) {
     CT: 0,
     trials: config.trials,
     render: function(CT, magpie, startingTime) {
+      const startingTime = Date.now()
       $("main").html(`<div class='magpie-view1'>
       <link rel="preload" href="${config.data[CT].context_picture}" as="image">
       <link rel="preload" href="${config.data[CT].target}" as="image">
@@ -300,16 +302,16 @@ const custom_slider = function(config, startingTime) {
 
        next.on("click", function() {
          console.log("CLICK")
-           // const RT = Date.now() - startingTime; // measure RT before anything else
+           const RT = Date.now() - startingTime; // measure RT before anything else
            let trial_data = {
                trial_name: config.name,
                trial_number: CT + 1,
                // 0 is prenominal, 1 is predicative
-               // sentence1: syntax[0],
-               // sentence2: syntax[1],
+               sentence1: syntax[0],
+               sentence2: syntax[1],
                response1: $("#response1_1").val(),
                response2: $("#response2_1").val(),
-               // RT: RT
+               RT: RT
            };
 
            trial_data = magpieUtils.view.save_config_trial_data(config.data[CT], trial_data);

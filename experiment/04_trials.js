@@ -24,7 +24,7 @@ const utt_predicative = {utterance1b: "That ", utterance2b: " is ", utterance1s:
 
 const syntax = _.shuffle([0,1]);
 const np_spec = _.shuffle([0, 0, 0, 1, 1, 1]);
-const adj_congr = _.shuffle([0, 0, 0, 1, 1, 1]);
+const adj_congr = _.shuffle([0, 0, 0, 0, 0, 0]);
 const size = _.shuffle([0, 0, 0, 1, 1, 1]);
 const items = {
   dogs1: [{np: ["doberman", "dog"],
