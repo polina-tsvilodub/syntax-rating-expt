@@ -33,12 +33,12 @@ $("document").ready(function() {
             // Possible deployment methods are:
             // "debug" and "directLink"
             // As well as "MTurk", "MTurkSandbox" and "Prolific"
-            deployMethod: "MTurkSandbox",
+            deployMethod: "MTurk",
             contact_email: "polinats@mit.edu",
             prolificURL: "https://app.prolific.ac/submissions/complete?cc=SAMPLE1234"
         },
 
-        uniqueTurkerID:  '0e8b1d8dfda437c9dfeff65c57c17e40',
+        uniqueTurkerID:  '25eacc6b3b42877acc2235f35889a2ef',
         // Here, you can specify how the progress bar should look like
         progress_bar: {
             in: [
