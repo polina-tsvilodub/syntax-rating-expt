@@ -36,7 +36,7 @@ d_rating_main <- d_rating_filter %>% filter((trial_name == "custom_slider1") | (
 ```
 
 ```{r}
-d_rating_main <- d_rating_main %>% mutate(np = factor(np, levels= c(0,1), 
+d_rate_main <- d_rate_main %>% mutate(np = factor(np, levels= c(0,1), 
                                                       labels = c("sub", "super")), 
                  sentence_order = factor(sentence_order, levels= c("0|1", "1|0"),
                                          labels = c("prenom_pred", "pred_prenom")),
@@ -91,14 +91,14 @@ d_rating_main %>%  group_by(np, sentence_order, congruence) %>% tidyboot_mean(co
 ## Analysis by syntax conditions order
 Trying to collapse the same condition to one mean 
 ``` {r}
-d_main_pred_prenom_pred <- d_rating_main %>% filter(sentence_order == "pred_prenom")  %>%
+d_main_pred_prenom_pred <- d_rate_main %>% filter(sentence_order == "pred_prenom")  %>%
   select(submission_id, np, congruence, response1, target_size, trial_number, item) %>% mutate(condition = "pred")
-d_main_pred_prenom_prenom <- d_rating_main %>% filter(sentence_order == "pred_prenom") %>%
+d_main_pred_prenom_prenom <- d_rate_main %>% filter(sentence_order == "pred_prenom") %>%
   select(submission_id, np, congruence, response1 = response2, target_size, trial_number, item) %>% 
   mutate(condition = "prenom")
-d_main_prenom_pred_prenom <- d_rating_main %>% filter(sentence_order == "prenom_pred") %>%
+d_main_prenom_pred_prenom <- d_rate_main %>% filter(sentence_order == "prenom_pred") %>%
   select(submission_id, np, congruence, response1, target_size, trial_number, item) %>% mutate(condition = "prenom")
-d_main_prenom_pred_pred <- d_rating_main %>% filter(sentence_order == "prenom_pred") %>%
+d_main_prenom_pred_pred <- d_rate_main %>% filter(sentence_order == "prenom_pred") %>%
   select(submission_id, np, congruence, response1 = response2, target_size, trial_number, item) %>% 
   mutate(condition = "pred")
 
@@ -114,7 +114,7 @@ rating_prenom %>% group_by(np, congruence) %>% tidyboot_mean(column = response1)
   geom_linerange(position = position_dodge(0.8))+ 
   ggtitle("Mean ratings in prenominal condition")
 
-rating_pred %>% group_by(np, congruence) %>% tidyboot_mean(column = response1) %>%
+d_full_long %>% group_by(np, congruence) %>% tidyboot_mean(column = response1) %>%
   ungroup() %>%
   ggplot(aes(x = np, y = mean, fill = congruence, ymin = ci_lower, ymax = ci_upper)) +
   geom_col(position = position_dodge(0.8)) +
@@ -188,9 +188,11 @@ summary(lm.fit)
 ```
 
 ``` {r}
+library(lmerTest)
 # fit brm to pnly congruent trials 
-d_full_long_congruent <- d_full_long %>% filter(congruence == "congr")
-blm.fit <- brm(response1 ~ condition*np + (1 | submission_id) + (1 + condition*np|item), data = d_full_long_congruent )
+d_full_long_congruent <- d_full_long %>% filter(congruence == "congr") %>% mutate(condition = ifelse(condition == "pred", -1, 1),
+                                                                                  np = ifelse(np == "super", -1, 1))
+blm.fit <- glmer(response1 ~ condition*np + (1 +condition*np | submission_id) + (1 + condition*np|item), data = d_full_long_congruent, REML = F )
 summary(blm.fit)
 ```
 

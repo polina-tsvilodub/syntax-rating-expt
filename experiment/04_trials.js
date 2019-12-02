@@ -194,7 +194,8 @@ const main_trials = {
       // 0 subordinate, 1 basic level
       np: np_spec[1],
       // 0 congruent, 1 incongruent
-      congruence: adj_congr[1]
+      congruence: adj_congr[1],
+      sentence_order: syntax
         },
     birds:    {
       context: "You and your friend see the following:",
