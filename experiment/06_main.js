@@ -20,9 +20,9 @@ $("document").ready(function() {
             instructions,
             custom_warmup,
             context1,
-            custom_slider1,
+            main_slider,
             // context2,
-            custom_slider2,
+            // custom_slider2,
             custom_post_test,
             thanks,
         ],
@@ -33,7 +33,7 @@ $("document").ready(function() {
             // Possible deployment methods are:
             // "debug" and "directLink"
             // As well as "MTurk", "MTurkSandbox" and "Prolific"
-            deployMethod: "MTurk",
+            deployMethod: "debug",
             contact_email: "polinats@mit.edu",
             prolificURL: "https://app.prolific.ac/submissions/complete?cc=SAMPLE1234"
         },
@@ -45,8 +45,7 @@ $("document").ready(function() {
                 // list the view-names of the views for which you want a progress bar
                 // warmup1.name,
                 custom_warmup.name,
-                custom_slider1.name,
-                custom_slider2.name
+                main_slider.name
             ],
 
              // Possible styles are "default", "separate" and "chunks"

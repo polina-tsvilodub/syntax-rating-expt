@@ -1,18 +1,9 @@
 // Here, you can define all custom functions, you want to use and initialize some variables
 
-/* Variables
-*
-*
-*/
+
 const coin = _.sample(["head", "tail"]); // You can determine global (random) parameters here
 // Declare your variables here
 
-
-
-/* Helper functions
-*
-*
-*/
 
 
 /* For generating random participant IDs */
@@ -28,19 +19,6 @@ const generateID = function(len) {
     return Array.from(arr, this.dec2hex).join("");
 };
 // Declare your helper functions here
-
-// $( function() {
-//     var handle = $( "#custom-handle" );
-//     $( "#slider" ).slider({
-//       create: function() {
-//         handle.addClass("magpie-nodisplay");
-//       } //,
-//       // slide: function( event ) {
-//       //   handle;
-//       }
-//     });
-//   } );
-
 
 /* Hooks
 *
@@ -71,11 +49,3 @@ check_response = function(data, next) {
         next();
     })
 }
-
-// Declare your hooks here
-
-
-/* Generators for custom view templates, answer container elements and enable response functions
-*
-*
-*/

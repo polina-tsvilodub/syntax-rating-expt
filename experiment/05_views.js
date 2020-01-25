@@ -1,6 +1,3 @@
-// In this file you can instantiate your views
-// We here first instantiate wrapping views, then the trial views
-
 
 /** Wrapping views below
 
@@ -18,9 +15,8 @@
 
 */
 
-// Every experiment should start with an intro view. Here you can welcome your participants and tell them what the experiment is about
 
-// For most tasks, you need instructions views
+//  instructions views
 const instructions = magpieViews.view_generator("instructions", {
   trials: 1,
   name: 'instructions',
@@ -45,6 +41,7 @@ const instructions = magpieViews.view_generator("instructions", {
   buttonText: 'go to trials'
 });
 
+// slider rating task comprehension warm-up
 const custom_warmup = custom_warmup_slider({
   trials: slider_warmup.warmup1.length,
   name: 'custom_warmup',
@@ -59,62 +56,21 @@ const thanks = magpieViews.view_generator("thanks", {
   prolificConfirmText: 'Press the button'
 });
 
-/** trial (magpie's Trial Type Views) below
-
-* Obligatory properties
-
-    - trials: int - the number of trials this view will appear
-    - name: string - the name of the view type as it shall be known to _magpie (e.g. for use with a progress bar)
-            and the name of the trial as you want it to appear in the submitted data
-    - data: array - an array of trial objects
-
-* Optional properties
-
-    - pause: number (in ms) - blank screen before the fixation point or stimulus show
-    - fix_duration: number (in ms) - blank screen with fixation point in the middle
-    - stim_duration: number (in ms) - for how long to have the stimulus on the screen
-      More about trial life cycle - https://magpie-ea.github.io/magpie-docs/01_designing_experiments/04_lifecycles_hooks/
-
-    - hook: object - option to hook and add custom functions to the view
-      More about hooks - https://magpie-ea.github.io/magpie-docs/01_designing_experiments/04_lifecycles_hooks/
-
-* All about the properties of trial views
-* https://magpie-ea.github.io/magpie-docs/01_designing_experiments/01_template_views/#trial-views
-*/
-
-
-// Here, we initialize a normal forced_choice view
-const custom_slider1 = custom_slider({
+// main trials
+const main_slider = custom_slider({
   // This will use all trials specified in `data`, you can user a smaller value (for testing), but not a larger value
-  trials: trial_info.main1.length,
+  trials: trial_info.main.length,
   // name should be identical to the variable name
-  name: 'custom_slider1',
-  data: _.shuffle(trial_info.main1),
-  // you can add custom functions at different stages through a view's life cycle
-  // hook: {
-  //     after_response_enabled: check_response
-  // }
+  name: 'main_slider',
+  data: _.shuffle(trial_info.main),
+
 });
 
 
-const custom_slider2 = custom_slider({
-  // This will use all trials specified in `data`, you can user a smaller value (for testing), but not a larger value
-  trials: trial_info.main2.length,
-  // name should be identical to the variable name
-  name: 'custom_slider2',
-  data: _.shuffle(trial_info.main2),
-  // you can add custom functions at different stages through a view's life cycle
-  // hook: {
-  //     after_response_enabled: check_response
-  // }
-});
-
-
-
+// speaker and listener names that can be used in the btcaptcha
 var speaker = _.sample(["James", "John", "Robert", "Michael", "William", "David", "Richard", "Joseph", "Thomas", "Charles"]);
 var listener = _.sample(["Mary", "Patricia", "Jennifer", "Linda", "Elizabeth", "Barbara", "Susan", "Jessica", "Sarah", "Margaret"]);
-
-
+// botcaptcha
 const botcaptcha = custom_botcaptcha({
   name: 'botcaptcha',
   trials: 1,
@@ -125,6 +81,7 @@ const botcaptcha = custom_botcaptcha({
 
 });
 
+// post-experiment view
 const custom_post_test = custom_post_test_view({
   name: 'post_test',
   title: 'Additional information',
@@ -133,6 +90,7 @@ const custom_post_test = custom_post_test_view({
     Answering the other questions is optional, but your answers will help us analyze our results.`,
   trials: 1
 });
+// introduction view
 const custom_intro = custom_intro_view({
   name: 'Intro',
   title: 'Welcome!',
@@ -141,6 +99,7 @@ const custom_intro = custom_intro_view({
 
 });
 
+// instructions after the warm-ups
 const context1 = magpieViews.view_generator("instructions",{
     trials: 1,
     name: 'instructions',
@@ -157,11 +116,3 @@ const context1 = magpieViews.view_generator("instructions",{
             `,
     buttonText: 'go to trials'
 });
-
-// The 'thanks' view is crucial; never delete it; it submits the results!
-
-
-
-// There are many more templates available:
-// forced_choice, slider_rating, dropdown_choice, testbox_input, rating_scale, image_selection, sentence_choice,
-// key_press, self_paced_reading and self_paced_reading_rating_scale

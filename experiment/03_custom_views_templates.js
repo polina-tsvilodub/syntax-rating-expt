@@ -1,5 +1,6 @@
-// In this file you can create your own custom view templates
+// In this file I create the custom view templates
 
+// botcaptcha
 const custom_botcaptcha = function(config){
   const view = {
     name: config.name,
@@ -84,6 +85,7 @@ const custom_botcaptcha = function(config){
   return view;
 };
 
+// sentence rating task comprehension check
 const custom_warmup_slider = function(config) {
   const view = {
     name: config.name,
@@ -148,7 +150,7 @@ const custom_warmup_slider = function(config) {
       next = $("#next");
       response1 = $("#response1");
       response2 = $("#response2");
-
+// attach input listener to the sliders and check that both are clicked on
       response1.on("click", function() {
           response1.addClass("magpie-nodisplay");
           document.getElementsByTagName("input")[1].setAttribute("value", response1.val());
@@ -174,26 +176,20 @@ const custom_warmup_slider = function(config) {
           $("#next").removeClass("magpie-nodisplay");
         })
       });
-
+// record trial data
       next.on("click", function() {
         console.log("CLICK")
           const RT = Date.now() - startingTime; // measure RT before anything else
           let trial_data = {
               trial_name: config.name,
               trial_number: CT + 1,
-              // 0 is prenominal, 1 is predicative
-              // sentence1: syntax[0],
-              // sentence2: syntax[1],
               response1: $("#response1_1").val(),
               response2: $("#response2_1").val(),
               RT: RT
           };
-
           trial_data = magpieUtils.view.save_config_trial_data(config.data[CT], trial_data);
-
           magpie.trial_data.push(trial_data);
           magpie.findNextView();
-
       })
 
     }
@@ -201,7 +197,7 @@ const custom_warmup_slider = function(config) {
   return view;
 }
 
-
+// main trials view
 const custom_slider = function(config, startingTime) {
   const view = {
     name: config.name,
@@ -273,7 +269,7 @@ const custom_slider = function(config, startingTime) {
         next = $("#next");
         response1 = $("#response1");
         response2 = $("#response2");
-
+// attach event listener to sliders and make sure both are clicked on before next-button appears
        response1.on("click", function() {
            response1.addClass("magpie-nodisplay");
            document.getElementsByTagName("input")[1].setAttribute("value", response1.val());
@@ -300,15 +296,15 @@ const custom_slider = function(config, startingTime) {
          })
        });
 
+// record response data
        next.on("click", function() {
-         console.log("CLICK")
            const RT = Date.now() - startTime; // measure RT before anything else
            let trial_data = {
                trial_name: config.name,
                trial_number: CT + 1,
                // 0 is prenominal, 1 is predicative
-               sentence1: syntax[0],
-               sentence2: syntax[1],
+               sentence1: possible_syntax[syntax[0]],
+               sentence2: possible_syntax[syntax[1]],
                response1: $("#response1_1").val(),
                response2: $("#response2_1").val(),
                RT: RT
@@ -322,17 +318,13 @@ const custom_slider = function(config, startingTime) {
 
        }
 
-
-        // next.on("click");
-
-
 };
 return view;
 };
 
 
 
-
+// custom post-experiment questions
 const custom_post_test_view = function(config) {
   const _survey = {
       name: config.name,
@@ -432,6 +424,7 @@ const custom_post_test_view = function(config) {
   return _survey;
 };
 
+// custom introduction view
 const custom_intro_view = function(config) {
   const view = {
       name: config.name,
@@ -457,7 +450,7 @@ const custom_intro_view = function(config) {
           `;
           $("#main").html(viewTemplate);
 
-
+// check unique tur ker id
           var bad_worker = false;
 
           console.log("UNIQUE TURKER?");
@@ -468,7 +461,7 @@ const custom_intro_view = function(config) {
               }
           })();
 
-
+// allow US IP addresses only
           console.log("ARE YOU FROM THE US???");
           function USOnly() {var accessKey = 'b487843addca6e9ec32e6ae28aeaa022';
 
@@ -483,7 +476,6 @@ const custom_intro_view = function(config) {
                }
              });
            }
-
 
           let next = $("#next");
           next.on("click", function() {
